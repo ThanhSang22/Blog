@@ -56,7 +56,7 @@ ROOT_URLCONF = 'webpy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['home/template'],
+        'DIRS': ['home/template', 'blog/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
