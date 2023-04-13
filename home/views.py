@@ -5,10 +5,10 @@ from django.http import HttpResponse
 def index(request): 
     return render(request,'pages/home.html')
 
-def index1(request): 
+def news(request): 
     return render(request,'pages/news.html')
 
-def index2(request): 
+def khoahoc(request): 
     return render(request,'pages/khoahoc.html')
 
 def contact(request): 
