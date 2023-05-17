@@ -1,10 +1,103 @@
 {% extends "../pages/base.html" %} 
 {% block title %} Blog {% endblock %} 
 {% block content %}
-{% for post in Posts %}
-<h4>
-  <!-- {{post.date|date:"d-m-Y"}}  -->
-  <a href="/blog/{{post.id}}" style="text-decoration: none; color: chocolate;"> {{post.title}} </a> {{post.body}}
-</h4>
+<div style="display: block; color: #684012;">
+  <h1>Xin Chào</h1>
+  Đây là trang TIN TỨC mới nhất của SnG
+</div>
+<style>
+  .post img{
+    display:block;
+    transition: all .3s ease;
+    object-fit: cover;
+  }
+  .post:hover img{
+    transform: scale(.8);
+  }
+  button{
+    background: none;
+    border: 2px solid chocolate;
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+  }
+  button:hover {
+    border: none;
+    background: chocolate;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .paginator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+  }
+  .pagination{
+    display: flex;
+  }
+  .page-item {
+    padding: 2px 6px;
+    border: 2px solid coral;
+    list-style: none;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+  .page-item:hover{
+    border: none;
+    background: coral;
+    border: 2px solid coral;
+    color: white;
+  }
+  .page-link {
+    text-decoration: none;
+  }
+  
+</style>
+{% for post in page_obj %}
+  <h4 class="col post" style="display: grid;  flex-direction: column;  background-color: #ffdcad; width: 200px;height: 270px; border: 5px dotted #f58e56; margin:15px;">
+    <a href="/blog/{{post.id}}/" style="text-decoration: none; color: chocolate; "> 
+      <img src="{{post.image.url}}" width="200px" height="170px" />
+      <center style="margin: 5px 0;">{{post.title}} </center>
+    </a> 
+    <!-- {{post.body}} -->
+    
+  <a href="/blog/{{post.id}}/" style="justify-content: center; align-items: center; display: flex; text-decoration: none;">
+    <button >Xem chi tiết</button>
+  </a>
+  </h4>
+
 {% endfor %} 
+<div class="paginator">
+  <nav aria-label="Page navigation example">
+    {% if page_obj.has_other_pages %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">Previous</a>
+      </li>
+      {% endif %}
+  
+      {% for i in page_obj.paginator.page_range %}
+      {% if page_obj.number == i %}
+      <li class="page-item"><span class="page-link">{{i}} <span class='sr-only'></span> </span></li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href='?page={{i}}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}'>{{i}}</a></li>
+      {% endif %}
+      {% endfor %}
+  
+      {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">Next</a></li>
+      {% endif %}
+      
+    </ul>
+    {% endif %}
+  </nav>
+</div>
+
 {% endblock %}
