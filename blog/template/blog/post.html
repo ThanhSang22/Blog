@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %} {% block tilte %} {{post.tilte}} {% endblock %}
+{% block content %}
+<style>
+    button{
+    background: none;
+    border: 1px solid chocolate;
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  button:hover {
+    border: 1px solid chocolate;
+    background: chocolate;
+    color: white;
+  }
+</style>
+<div class="col" style="margin-left: 50px; justify-content: center; align-items: center; display: flex; flex-direction: column; margin-bottom: 20px;">
+    <h3 class="center">
+        <a href="/blog/{{post.id}}/"  style="text-decoration: none; color: chocolate">
+            {{post.title}}
+        </a>
+    </h3>
+    <center><img src="{{post.image.url}}" width="200px" height="170px" style="object-fit: cover;" /></center>
+    <p style="text-align: justify">
+        {{post.body|safe|linebreaks}} 
+    </p>
+    <audio src="{{post.audio.url}}" controls></audio>
+    <a href="/blog/" style="justify-content: center; align-items: center; display: flex; text-decoration: none;">
+        <button >Quay lại</button>
+      </a>
+</div>
+{% endblock %}
